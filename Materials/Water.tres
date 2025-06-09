@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cp5ughqjh0j1f"]
+
+[ext_resource type="Shader" path="res://Materials/watershader.gdshader" id="1_8w7w5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ry0sw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1d33x"]
+noise = SubResource("FastNoiseLite_ry0sw")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8w7w5")
+shader_parameter/color = Color(0.19, 0.71, 0.82, 0.44)
+shader_parameter/height_factor = 0.1
+shader_parameter/wave_pattern = SubResource("NoiseTexture2D_1d33x")

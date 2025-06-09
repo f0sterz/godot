@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cor5hdsb2s67h"]
+
+[ext_resource type="PackedScene" uid="uid://bomegqdytqqjg" path="res://car.glb" id="1_8ilv2"]
+[ext_resource type="Script" path="res://player.gd" id="1_p1g41"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2vmp6"]
+size = Vector3(0.625122, 0.242279, 0.315186)
+
+[sub_resource type="GDScript" id="GDScript_7xq23"]
+script/source = "extends CollisionShape3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.325, 0)
+script = ExtResource("1_p1g41")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Character" parent="Pivot" instance=ExtResource("1_8ilv2")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00384521, 0.00694275, 0.00183105)
+shape = SubResource("BoxShape3D_2vmp6")
+script = SubResource("GDScript_7xq23")
+
+[node name="VehicleWheel3D" type="VehicleWheel3D" parent="."]
