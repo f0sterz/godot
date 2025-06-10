@@ -25,12 +25,17 @@ mesh = SubResource("BoxMesh_rshkq")
 transform = Transform3D(1, 0, 0, 0, 0.0712886, 0.997456, 0, -0.997456, 0.0712886, 0, 20.9561, 0)
 shadow_enabled = true
 
-[node name="CameraPivot" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.678096, 0.734974, 0, -0.734974, 0.678096, 0, 1.45684, 1.15423)
-script = ExtResource("1_xnfkw")
-
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-script = ExtResource("2_nx1hc")
-
 [node name="Player" parent="." instance=ExtResource("1_ifrr0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23827, 0)
+
+[node name="CameraPivot" type="Marker3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.678096, 0.734974, 0, -0.734974, 0.678096, 0, 0.33174, 1.15423)
+script = ExtResource("1_xnfkw")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.678095, -0.734973, 0, 0.734973, 0.678095, 0, -0.139548, -1.85342)
+spring_length = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.999581, -0.0289509, 0, 0.0289509, 0.999581, 0, 1.02942, 2.05057)
+script = ExtResource("2_nx1hc")
