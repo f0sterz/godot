@@ -1,6 +1,6 @@
 extends CharacterBody3D
-@onready var _cam = $SpringArm3D/Camera3D as Camera3D
-
+#@onready var _cam = $CameraPivot/SpringArm3D/Camera3D as Camera3D
+@onready var _cam = $Pivot/Character/CameraPivot/Camera3D as Camera3D
 # How fast the player moves in meters per second.
 @export var speed = 0
 @export var speedback = 0
@@ -15,15 +15,17 @@ var my_basis = Basis.IDENTITY
 var anglespeedl =0
 var anglespeedr =0
 ##
-
+var aaa = 0
 func _physics_process(delta):
 	# We create a local variable to store the input direction.
 	var target_velocity = Vector3()
 	velo = target_velocity
 												# We check for each move input and update the direction accordingly.
-	
-	_cam.position = Vector3(0,1,0)
-	
+	#_camera_pivot.position=Vector3(10,0,10)
+	#aaa-=0.001
+	_cam.position = Vector3(0,0,0)
+	#$CameraPivot/SpringArm3D/Camera3D.basis.position= Vector3(10,11, 0)
+	#_cam.rotate_y(0.001)
 	if Input.is_action_pressed("move_forward"):
 			while speed < 150:
 				speed+=1

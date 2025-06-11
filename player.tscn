@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cor5hdsb2s67h"]
+[gd_scene load_steps=7 format=3 uid="uid://cor5hdsb2s67h"]
 
 [ext_resource type="PackedScene" uid="uid://bomegqdytqqjg" path="res://car.glb" id="1_8ilv2"]
 [ext_resource type="Script" path="res://player.gd" id="1_p1g41"]
+[ext_resource type="Script" path="res://Materials/camera_pivot.gd" id="3_ootpj"]
+[ext_resource type="Script" path="res://Materials/camera_3d.gd" id="4_u5m2r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2vmp6"]
 size = Vector3(0.625122, 0.242279, 0.315186)
@@ -29,9 +31,19 @@ script = ExtResource("1_p1g41")
 
 [node name="Character" parent="Pivot" instance=ExtResource("1_8ilv2")]
 
+[node name="CameraPivot" type="Marker3D" parent="Pivot/Character"]
+transform = Transform3D(1, 0, 0, 0, 0.999848, 0.0174522, 0, -0.0174522, 0.999848, 0, -0.0293341, 1.47058)
+script = ExtResource("3_ootpj")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Pivot/Character/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.354669, -1.47624)
+spring_length = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="Pivot/Character/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.999386, -0.0350221, 0, 0.0350221, 0.999386, 0, 0, 0)
+script = ExtResource("4_u5m2r")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00384521, 0.00694275, 0.00183105)
 shape = SubResource("BoxShape3D_2vmp6")
 script = SubResource("GDScript_7xq23")
-
-[node name="VehicleWheel3D" type="VehicleWheel3D" parent="."]
