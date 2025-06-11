@@ -24,11 +24,11 @@ func _physics_process(delta):
 	
 	#_cam.rotate_y(0.001)
 	if Input.is_action_pressed("move_forward"): #&& speedback==0:
-		speedback+=1
-		if speedback>=0:	
-			while speed < 150:
-				speed+=1
-				break
+		#speedback+=1
+		#if speedback>=0:	
+		while speed < 150:
+			speed+=1
+			break
 			
 			
 	if speed > 0:
@@ -47,11 +47,11 @@ func _physics_process(delta):
 			
 	
 	if Input.is_action_pressed("move_back"):
-		speed-=0.5
-		if speed<=0:	
-			while speedback > -150:
-				speedback-=1
-				break
+		#speed-=0.5
+		#if speed<=0:	
+		while speedback > -150:
+			speedback-=1
+			break
 				
 				
 	if speedback < 0:
