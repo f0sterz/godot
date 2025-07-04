@@ -8,8 +8,13 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#rotate_y(0.01)
+	#if Input.is_action_pressed("move_left"):
+		#look_at_from_position(Vector3(0,0,0) )
+		
+		#rotate_y(-0.01)
+		#rotate(Vector3.UP, 0.01)
+		#rotate_y(-0.01)
 	
 	#look_at(target, Vector3.UP)Pivot
-	
+
 	pass

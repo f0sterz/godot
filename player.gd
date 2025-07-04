@@ -15,6 +15,8 @@ var anglespeedl:float =0
 var anglespeedr:float =0
 ##
 var aaa = 0
+const RIGHT:int = 1 
+const LEFT:int = 0
 func _physics_process(delta):
 	# We create a local variable to store the input direction.
 	var target_velocity = Vector3()
@@ -26,33 +28,39 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_forward"): #&& speedback==0:
 		#speedback+=1
 		#if speedback>=0:	
-		while speed < 150:
-			speed+=1
-			break
+		if speedback==0:
+			while speed < 150:
+				speed+=1
+				break
 			
 			
 	if speed > 0:
 		if Input.is_action_pressed("move_left"):
-			while anglespeedl < 0.05:
-				anglespeedl+=0.003
+			while anglespeedl < 0.03:
+				anglespeedl+=0.0015
 				break
-			angle=angle+speed*0.00005 + anglespeedl
+			angle+=anglespeedl*speed/100
+			$Pivot/Character/CameraPivot/Camera3D.translate(Vector3(-1,0,0))
+													#angle=angle+speed*0.00005 + anglespeedl
 			
 				
 		if Input.is_action_pressed("move_right"):
-			while anglespeedr < 0.05:
-				anglespeedr+=0.005
+			while anglespeedr < 0.03:
+				anglespeedr+=0.0015
 				break
-			angle=angle-anglespeedr
+			angle-=anglespeedr*speed/100
+			$Pivot/Character/CameraPivot/Camera3D.translate(Vector3(1,0,0))
+			#global_rotate(Vector3(0,1,0),0.001)
+																					#angle=angle-anglespeedr
 			
 	
 	if Input.is_action_pressed("move_back"):
 		#speed-=0.5
 		#if speed<=0:	
-		while speedback > -150:
-			speedback-=1
-			break
-				
+		if speed==0:
+			while speedback > -150:
+				speedback-=1
+				break
 				
 	if speedback < 0:
 		if Input.is_action_pressed("move_left"):
@@ -65,15 +73,16 @@ func _physics_process(delta):
 
 	
 	if (Input.is_action_pressed("move_forward") == false):
-		while speed > 0 :
+		while speed != 0 :
 			speed -= 1
 			break
 					
 	if (Input.is_action_pressed("move_back") == false):
-		while speedback < 0 :
+		while speedback != 0 :
 			speedback += 1
 			break		
 					
+
 	if (Input.is_action_pressed("move_left") == false):
 		anglespeedl=0	
 	if (Input.is_action_pressed("move_right") == false):
@@ -93,7 +102,7 @@ func _physics_process(delta):
 	
 												# Ground Velocity
 
-	target_velocity.x = (speed + speedback) * delta
+	target_velocity.x = (speed+speedback) * delta
 	target_velocity = target_velocity.rotated(Vector3.UP, angle)#.normalized()
 	
 		
