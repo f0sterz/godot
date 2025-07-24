@@ -1,6 +1,6 @@
 extends CharacterBody3D
 #@onready var _cam = $CameraPivot/SpringArm3D/Camera3D as Camera3D
-@onready var _cam = $Pivot/Character/CameraPivot/Camera3D as Camera3D
+#@onready var _cam = $Pivot/Character/CameraPivot/Camera3D as Camera3D
 @onready var _collision = $CollisionShape3D as CollisionShape3D
 # How fast the player moves in meters per second.
 @export var speed:float = 0
@@ -17,12 +17,16 @@ var anglespeedr:float =0
 var aaa = 0
 const RIGHT:int = 1 
 const LEFT:int = 0
+
+
 func _physics_process(delta):
+	var _Cam = get_parent().get_node("CameraPivot/Camera3D")
 	# We create a local variable to store the input direction.
 	var target_velocity = Vector3()
+	
 													# We check for each move input and update the direction accordingly.
 	#aaa-=0.001
-	_cam.position = Vector3(0,0,0)
+	#_cam.position = Vector3(0,0,0)
 	
 	#_cam.rotate_y(0.001)
 	if Input.is_action_pressed("move_forward"): #&& speedback==0:
@@ -40,7 +44,8 @@ func _physics_process(delta):
 				anglespeedl+=0.0015
 				break
 			angle+=anglespeedl*speed/100
-			$Pivot/Character/CameraPivot/Camera3D.translate(Vector3(-1,0,0))
+			
+			
 													#angle=angle+speed*0.00005 + anglespeedl
 			
 				
@@ -49,7 +54,7 @@ func _physics_process(delta):
 				anglespeedr+=0.0015
 				break
 			angle-=anglespeedr*speed/100
-			$Pivot/Character/CameraPivot/Camera3D.translate(Vector3(1,0,0))
+			get_node("CameraPivot")
 			#global_rotate(Vector3(0,1,0),0.001)
 																					#angle=angle-anglespeedr
 			
@@ -114,3 +119,7 @@ func _physics_process(delta):
 	
 	velocity = target_velocity
 	move_and_slide()
+
+
+
+	 

@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxr1cmkax16pi"]
+[gd_scene load_steps=10 format=3 uid="uid://bxr1cmkax16pi"]
 
 [ext_resource type="PackedScene" uid="uid://cor5hdsb2s67h" path="res://player.tscn" id="1_ifrr0"]
+[ext_resource type="Script" path="res://Materials/camera_pivot.gd" id="2_di4p3"]
+[ext_resource type="Script" path="res://Materials/camera_3d.gd" id="3_3cqdr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6oaa"]
 size = Vector3(60, 2, 60)
@@ -53,3 +55,20 @@ mesh = SubResource("BoxMesh_grkm1")
 [node name="MeshInstance3D2" type="CollisionShape3D" parent="StaticBody3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.09485)
 shape = SubResource("BoxShape3D_ip6q0")
+
+[node name="CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(-3.88549e-08, 0.47355, -0.880767, 2.00245e-08, 0.880767, 0.47355, 1, 7.62869e-10, -4.37047e-08, -1.00422, 0.813983, 0)
+script = ExtResource("2_di4p3")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.354669, -1.47624)
+spring_length = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.999386, -0.0350221, 0, 0.0350221, 0.999386, 0, 0, 0)
+script = ExtResource("3_3cqdr")
+
+[connection signal="input_event" from="Player" to="CameraPivot" method="_on_player_input_event"]
+[connection signal="tree_entered" from="CameraPivot/Camera3D" to="Player" method="_on_camera_3d_tree_entered"]
+
+[editable path="Player"]
