@@ -23,8 +23,9 @@ func _physics_process(delta):
 	var _Cam = get_parent().get_node("CameraPivot/Camera3D")
 	# We create a local variable to store the input direction.
 	var target_velocity = Vector3()
-	
+	#_Cam.transform.origin=
 													# We check for each move input and update the direction accordingly.
+	
 	#aaa-=0.001
 	#_cam.position = Vector3(0,0,0)
 	

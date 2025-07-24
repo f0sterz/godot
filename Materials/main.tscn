@@ -36,6 +36,18 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_ifrr0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23827, 0)
 
+[node name="CameraPivot" type="Marker3D" parent="Player/Pivot/Character" index="1"]
+transform = Transform3D(-4.24231e-08, 0.257891, -0.966174, 1.05341e-08, 0.966174, 0.257891, 1, 7.62869e-10, -4.37047e-08, -1.00422, 0.46935, 0)
+script = ExtResource("2_di4p3")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Player/Pivot/Character/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.354669, -1.47624)
+spring_length = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="Player/Pivot/Character/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.999386, -0.0350221, 0, 0.0350221, 0.999386, 0, 0, 0)
+script = ExtResource("3_3cqdr")
+
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35059, 0.525883, 0)
 
@@ -56,19 +68,7 @@ mesh = SubResource("BoxMesh_grkm1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.09485)
 shape = SubResource("BoxShape3D_ip6q0")
 
-[node name="CameraPivot" type="Marker3D" parent="."]
-transform = Transform3D(-3.88549e-08, 0.47355, -0.880767, 2.00245e-08, 0.880767, 0.47355, 1, 7.62869e-10, -4.37047e-08, -1.00422, 0.813983, 0)
-script = ExtResource("2_di4p3")
-
-[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, -0.354669, -1.47624)
-spring_length = 0.5
-
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.999386, -0.0350221, 0, 0.0350221, 0.999386, 0, 0, 0)
-script = ExtResource("3_3cqdr")
-
-[connection signal="input_event" from="Player" to="CameraPivot" method="_on_player_input_event"]
-[connection signal="tree_entered" from="CameraPivot/Camera3D" to="Player" method="_on_camera_3d_tree_entered"]
+[connection signal="input_event" from="Player" to="Player/Pivot/Character/CameraPivot" method="_on_player_input_event"]
+[connection signal="tree_entered" from="Player/Pivot/Character/CameraPivot/Camera3D" to="Player" method="_on_camera_3d_tree_entered"]
 
 [editable path="Player"]
